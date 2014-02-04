@@ -1,0 +1,44 @@
+{
+  "order" : 0,
+  "template" : "logstash-*",
+  "settings" : {
+    "index.analysis.analyzer.default.stopwords" : "_none_",
+    "index.refresh_interval" : "5s",
+    "index.analysis.analyzer.default.type" : "standard"
+  },
+  "mappings" : {
+    "nova" : {
+      "properties":{
+        "geoip" : {
+          "dynamic" : true,
+          "path" : "full",
+          "properties" : {
+            "location" : {
+              "type" : "geo_point"
+            }
+          },
+          "type" : "object"
+        },
+        "@version" : {
+          "index" : "not_analyzed",
+          "type" : "string"
+        },
+        "type" : {
+          "type" : "string",
+          "analyzer": "whitespace",
+          "index": "analyzed"
+        },
+        "file" : {
+          "type" : "string",
+          "analyzer": "whitespace",
+          "index": "analyzed"
+        },
+        "host" : {
+          "type" : "string",
+          "analyzer": "whitespace",
+          "index": "analyzed"
+        }
+      }
+    }
+  }
+}
