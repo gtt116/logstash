@@ -1,13 +1,17 @@
 # Setup
     
-Go to http://logstash.net/ get latest logstash.
 start elasticSearch first.
+
+# Topology
+
+beaver, beaver, beaver --> redis <--> logstash --> ElasticSearch
 
 
 # Usage
 
     # Running in slave nodes.
-    java -jar logstash-1.1.13-flatjar.jar agent -f harvester.conf --watchdog-timeout 1000
+    pip install beaver #beaver is a lighweight logstash shiper.
+    beaver -c beaver.conf -t redis
 
     # Running in master nodes.
-    java -jar logstash-1.1.13-flatjar.jar agent -f indexer.conf
+    java -jar logstash-1.3.3-flatjar.jar agent -f indexer.conf
